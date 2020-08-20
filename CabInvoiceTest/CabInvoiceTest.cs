@@ -51,7 +51,7 @@ namespace CabInvoiceGeneratorTest
         /// Test method to calculate total fare of journey for multiple rides.
         /// </summary>
         [Test]
-        public void GivenMultipleRides_WhenCalculated_ReturnTotalFare()
+        public void GivenMultipleRides_WhenCalculated_ThenShouldReturnTotalFare()
         {
             double firstRideDistance = 26.05;
             double secondRideDistance = 12.39;
@@ -61,6 +61,18 @@ namespace CabInvoiceGeneratorTest
             Rides[] rides = { new Rides(firstRideDistance, firstRideTime), new Rides(secondRideDistance, secondRideTime) };
             double cabInvoiceGeneratorTotalFare = this.cabInvoiceGenerator.GetTotalFare(rides);
             Assert.AreEqual(438.4, cabInvoiceGeneratorTotalFare);
+        }
+
+        /// <summary>
+        /// Test method to calculate invoice summery.
+        /// </summary>
+        [Test]
+        public void GivenMultipleRides_WhenCalculated_ThenShouldReturnInvoiceSummery()
+        {
+            Rides[] rides = { new Rides(25.12, 40), new Rides(12.39, 25) };
+            InvoiceSummary invoiceSummary = this.cabInvoiceGenerator.GetInvoiceSummary(rides);
+            InvoiceSummary summary = new InvoiceSummary(2, 440.1);
+            Assert.AreEqual(summary, invoiceSummary);
         }
     }
 }
