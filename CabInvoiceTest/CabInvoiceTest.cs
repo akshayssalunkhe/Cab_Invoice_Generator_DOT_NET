@@ -46,5 +46,21 @@ namespace CabInvoiceGeneratorTest
             double cabInvoiceGeneratorTotalFare = this.cabInvoiceGenerator.GetTotalTravelFare(distance, time);
             Assert.AreEqual(5, cabInvoiceGeneratorTotalFare);
         }
+
+        /// <summary>
+        /// Test method to calculate total fare of journey for multiple rides.
+        /// </summary>
+        [Test]
+        public void GivenMultipleRides_WhenCalculated_ReturnTotalFare()
+        {
+            double firstRideDistance = 26.05;
+            double secondRideDistance = 12.39;
+            double firstRideTime = 29;
+            double secondRideTime = 25;
+
+            Rides[] rides = { new Rides(firstRideDistance, firstRideTime), new Rides(secondRideDistance, secondRideTime) };
+            double cabInvoiceGeneratorTotalFare = this.cabInvoiceGenerator.GetTotalFare(rides);
+            Assert.AreEqual(438.4, cabInvoiceGeneratorTotalFare);
+        }
     }
 }

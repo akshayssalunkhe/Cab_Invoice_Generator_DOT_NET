@@ -2,10 +2,10 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using System;
-
 namespace CabInvoiceGenerator
 {
+    using System;
+
     /// <summary>
     /// Main class.
     /// </summary>
@@ -18,14 +18,31 @@ namespace CabInvoiceGenerator
         /// <summary>
         /// Function to calculate total fare of journey.
         /// </summary>
-        /// <param name="distance"></param>
-        /// <param name="time"></param>
+        /// <param name="distance">Travel distance.</param>
+        /// <param name="time">Travel time.</param>
         /// <returns>Total fare of journey.</returns>
         public double GetTotalTravelFare(double distance, double time)
         {
             double totalTravelFare = (this.costPerKilometer * distance) + (this.costPerMinute * time);
             totalTravelFare = Math.Max(totalTravelFare, this.minimumFare);
             return totalTravelFare;
+        }
+
+        /// <summary>
+        /// Function to calculate total fare of journey for multiple rides.
+        /// </summary>
+        /// <param name="rides">passsng the ride information.</param>
+        /// <returns>Total fare of journey.</returns>
+        public double GetTotalFare(Rides[] rides)
+        {
+            double totalFare = 0;
+            foreach (Rides ride in rides)
+            {
+                totalFare += (ride.distance * this.costPerKilometer) + (ride.time * this.costPerMinute);
+            }
+
+            totalFare = Math.Max(totalFare, this.minimumFare);
+            return totalFare;
         }
     }
 }
