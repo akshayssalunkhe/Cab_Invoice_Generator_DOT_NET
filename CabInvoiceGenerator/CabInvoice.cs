@@ -15,6 +15,16 @@ namespace CabInvoiceGenerator
         private int costPerMinute = 1;
         private int minimumFare = 5;
 
+        private RideRepository rideRepository;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CabInvoice"/> class.
+        /// </summary>
+        public CabInvoice()
+        {
+            this.rideRepository = new RideRepository();
+        }
+
         /// <summary>
         /// Function to calculate total fare of journey.
         /// </summary>
@@ -54,6 +64,28 @@ namespace CabInvoiceGenerator
         {
             double totalFare = this.GetTotalFare(rides);
             return new InvoiceSummary(rides.Length, totalFare);
+        }
+
+        /// <summary>
+        /// Function to get invoice summary using user id.
+        /// </summary>
+        /// <param name="userId">userId.</param>
+        /// <returns>invoice summary of particular ride.</returns>
+        public InvoiceSummary GetInvoiceSummary(string userId)
+        {
+            Rides[] rideList = this.rideRepository.GetRides(userId);
+            double totalFare = this.GetTotalFare(rideList);
+            return new InvoiceSummary(rideList.Length, totalFare);
+        }
+
+        /// <summary>
+        /// Function to add rides.
+        /// </summary>
+        /// <param name="userId">userId.</param>
+        /// <param name="rides">rides.</param>
+        public void AddRides(string userId, Rides[] rides)
+        {
+            this.rideRepository.AddRides(userId, rides);
         }
     }
 }
