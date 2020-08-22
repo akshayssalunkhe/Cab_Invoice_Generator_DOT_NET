@@ -14,17 +14,6 @@ namespace CabInvoiceGenerator
     public class CabInvoiceException : Exception
     {
         /// <summary>
-        /// Enum.
-        /// </summary>
-        public enum ExceptionType
-        {
-            /// <summary>
-            /// Enum for invalid user.
-            /// </summary>
-            INVALID_USER,
-        }
-
-        /// <summary>
         /// Exception type.
         /// </summary>
         public ExceptionType exceptionType;
@@ -40,5 +29,15 @@ namespace CabInvoiceGenerator
             this.exceptionType = exceptionType;
         }
 
+        /// <summary>
+        /// Enum.
+        /// </summary>
+        public enum ExceptionType
+        {
+            /// <summary>
+            /// Enum for invalid user.
+            /// </summary>
+            INVALID_USER,
+        }
     }
 }
