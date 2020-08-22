@@ -31,8 +31,8 @@ namespace CabInvoiceGenerator
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoiceSummary"/> class.
         /// </summary>
-        /// <param name="length"></param>
-        /// <param name="totalFare"></param>
+        /// <param name="length">length.</param>
+        /// <param name="totalFare">total fare.</param>
         public InvoiceSummary(int length, double totalFare)
         {
             this.NumberOfRides = length;
@@ -43,7 +43,7 @@ namespace CabInvoiceGenerator
         /// <summary>
         /// Override equals method.
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="obj">object to check.</param>
         /// <returns>true if specified object is equal to current object.</returns>
         public override bool Equals(object obj)
         {

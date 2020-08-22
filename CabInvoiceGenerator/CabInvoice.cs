@@ -5,6 +5,7 @@
 namespace CabInvoiceGenerator
 {
     using System;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Main class.
@@ -14,7 +15,7 @@ namespace CabInvoiceGenerator
         private double costPerKilometer = 10;
         private int costPerMinute = 1;
         private int minimumFare = 5;
-
+        private Regex userIdPattern = new Regex("^[a-z]{4,}[@][.][a-z]{3}$");
         private RideRepository rideRepository;
 
         /// <summary>
@@ -85,6 +86,11 @@ namespace CabInvoiceGenerator
         /// <param name="rides">rides.</param>
         public void AddRides(string userId, Rides[] rides)
         {
+            if (!this.userIdPattern.IsMatch(userId))
+            {
+                throw new CabInvoiceException("Invalid user", CabInvoiceException.ExceptionType.INVALID_USER);
+            }
+
             this.rideRepository.AddRides(userId, rides);
         }
     }
